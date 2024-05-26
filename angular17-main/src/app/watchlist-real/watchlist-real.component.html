@@ -1,0 +1,28 @@
+<div class="container">
+    <h1 class="display-2 text-center my-4">WATCHLIST</h1>
+  
+    <div *ngIf="movies.length === 0">
+      <p>No hay películas en la lista.</p>
+    </div>
+  
+    <div class="card mb-3" *ngFor="let movie of movies; let i = index">
+      <div class="row g-0">
+        <div class="col-md-2 d-flex align-items-center justify-content-end">
+          <div class="rounded overflow-hidden border border-dark">
+            <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" class="img-fluid rounded-start" alt="Movie Poster">
+            <img *ngIf="!movie.poster_path" src="../assets/noexiste.png" class="img-fluid rounded-start" alt="Movie Poster">
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text"><strong>Fecha:</strong> {{ movie.release_date }}</p>
+            <p class="card-text">{{ movie.overview.slice(0, 200) + '...'}}</p>
+            <p class="card-text">Puntuación: {{ (movie.vote_average * 10).toFixed(2) }}</p>
+            <a href="/film/{{movie.id}}" class="btn btn-primary bg-dark">Ver más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

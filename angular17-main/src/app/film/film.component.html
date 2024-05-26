@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row mb-3 border-top border-bottom">
+          <div class="col-md-4">
+  
+            <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Imagen de la película" class="img-fluid">
+          </div>
+          <div class="col-md-8">
+    
+            <h3 class="display-1 my-4">{{ movie.title }}</h3>
+            <p>{{ movie.overview }}</p>
+            <p>Puntuación: {{ (movie.vote_average * 10).toFixed(2) }}</p>
+            <p>Fecha de lanzamiento: {{movie.release_date}}</p>
+
+            <p>Género:</p>
+              <ul>
+                <li *ngFor="let genre of movie.genres">{{ genre.name }}</li>
+              </ul>
+            
+            <p>Título original: {{movie.original_language}}</p>
+            <div class="mt-4">
+              <!-- Botón para añadir a la watchlist -->
+              <button class="btn btn-primary mr-3" (click)="addToWatchlist()">Añadir a Watchlist</button>
+              <!-- Botón para eliminar de la watchlist -->
+              <button class="btn btn-danger" (click)="deleteToWatchlist()">Eliminar de Watchlist</button>
+              <!-- Botón para volver -->
+              <a href="home" class="btn btn-primary bg-dark ml-3">Volver</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>    

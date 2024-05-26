@@ -1,0 +1,61 @@
+<div class="container">
+  <form
+    class="custom-form"
+    (ngSubmit)="loginFormulario()"
+    #registroForm="ngForm"
+  >
+    <h1>Login</h1>
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nombre"
+        name="nombre"
+        [(ngModel)]="nombre"
+        required
+      />
+    </div>
+    <div
+      *ngIf="
+        registroForm.form.controls['nombre'].invalid &&
+        (registroForm.form.controls['nombre'].dirty ||
+          registroForm.form.controls['nombre'].touched)
+      "
+      class="alert alert-danger"
+    >
+      Nombre de usuario es requerido.
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+      />
+    </div>
+    <div
+      *ngIf="
+        registroForm.form.controls['password'].invalid &&
+        (registroForm.form.controls['password'].dirty ||
+          registroForm.form.controls['password'].touched)
+      "
+      class="alert alert-danger"
+    >
+      Contraseña es requerida.
+    </div>
+    <div *ngIf="errorMensaje" class="alert alert-danger">
+      {{ errorMensaje }}
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!registroForm.form.valid"
+    >
+      Logearse
+    </button>
+  </form>
+</div>

@@ -1,0 +1,16 @@
+.accordion-header:after {
+    content: "🔻";
+
+}
+
+.accordion-header {
+    border-bottom: 1px solid #000000;
+    position: relative;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.accordion-header[aria-expanded="true"]:after {
+    content: "🔺";
+
+}

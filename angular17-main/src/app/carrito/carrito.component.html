@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <div class="row">
+    <h1>Carrito</h1>
+    {{pedido.id}}
+    <div class="card mb-3" *ngFor="let servicio of servicios">
+      <div class="row g-0">
+
+        <div class="col-md-2 d-flex align-items-center justify-content-end">
+          <div class="rounded overflow-hidden border border-dark">
+            <img [src]="servicio.imagen ? 'http://127.0.0.1:8000/' + servicio.imagen : 'https://via.placeholder.com/300'" class="card-img-top" alt="Imagen del servicio">
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{ servicio.nombre_servicio }}</h5>
+            <p class="card-text"><strong>Cantidad:</strong> {{ servicio.cantidad }}</p>
+            <p class="card-text"><strong>Precio:</strong> {{ servicio.precio }}</p>
+            <p class="card-text"><strong>Total:</strong> {{ servicio.total }}</p>eliminarDelCarrito
+            <a class="btn btn-danger m-2" (click)="eliminarDelCarrito(servicio.servicio_id)">Eliminar del carrito</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h3>Total Carrito: {{ pedido.total }}€</h3>  
+      <a class="btn btn-danger m-2" (click)="pagarPedido(pedido.id)">Realizar Pago</a>
+    </div>
+  </div>
+</div>
+
+    
