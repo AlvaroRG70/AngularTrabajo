@@ -24,6 +24,7 @@ import { ReseniasCreateComponent } from './resenias-create/resenias-create.compo
 import { EditarServicioComponent } from './editar-servicio/editar-servicio.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PagoComponent } from './pago/pago.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -48,7 +49,8 @@ import { PagoComponent } from './pago/pago.component';
     ReseniasCreateComponent,
     EditarServicioComponent,
     CarritoComponent,
-    PagoComponent
+    PagoComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

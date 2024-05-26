@@ -4,6 +4,7 @@ import { DjangoService } from '../services/django-service.service';
 import { ApiServiceService } from '../services/api-service.service';
 import { TokenService } from '../services/token.service';
 import { LoginService } from '../services/login.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-registro',
@@ -50,28 +51,36 @@ export class RegistroComponent {
             setTimeout(() => {
               const dataEmail = {
                 to_email: this.email
-                };
+              };
               this.apiService.enviarCorreo(dataEmail).subscribe(
                 emailResponse => {
                   console.log('Correo enviado con éxito:', emailResponse);
+                  Swal.fire({
+                    icon: "success",
+                    title: "Su registro ha sido completado con éxito",
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).then(() => {
+                    // Navegar a la página deseada
+                    this.router.navigate(['/home']).then(() => {
+                      // Recargar la página después de una breve pausa
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 500);
+                    });
+                  });
                 },
                 emailError => {
                   console.error('Error al enviar el correo:', emailError);
                 }
-                ); 
-                ;
+              );
             }, 100);
-            this.router.navigate(['/home'])
-            },
-            
+          },
           loginError => {
             // Error en el inicio de sesión
             console.error('Error al iniciar sesión después del registro:', loginError);
           }
         );
-        
-
- 
       },
       error => {
         // Error en el registro
@@ -81,4 +90,3 @@ export class RegistroComponent {
     );
   }
 }
-

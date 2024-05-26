@@ -11,6 +11,7 @@ export class ApiServiceService {
 
   private apiUrl = 'http://127.0.0.1:8000/api/v1/';
   idPedido = "";
+  peliculaId = "";
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
   getTokenFromSessionStorage(): string {
@@ -235,6 +236,9 @@ export class ApiServiceService {
         })
       );
   }
+
+  
+
 
 
 

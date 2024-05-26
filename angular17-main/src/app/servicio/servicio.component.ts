@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceService } from '../services/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-servicio',
@@ -78,7 +79,14 @@ export class ServicioComponent implements OnInit {
     this.ApiServiceService.createResenias(dataSignUp, idUsuario, idServicio)
       .subscribe(
         response => {
-          window.location.reload();
+          Swal.fire({
+            icon: "success",
+            title: "Has creado el servicio correctamente",
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+              window.location.reload();
+          }); 
         },
         error => {
           console.log(error);
