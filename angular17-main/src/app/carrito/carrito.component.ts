@@ -22,6 +22,10 @@ export class CarritoComponent {
   ngOnInit(): void {
  
     this.carritoCompra()
+    const script = document.createElement('script');
+    script.src = 'https://www.paypal.com/sdk/js?client-id=AQ59a7WQftmR4OEJLEPvR9MBhwmYrYSZEbaM_ymDwrzWEHeAmxIxJTdwPqEfspfe3p1SK6y1wBLrUZxt';
+    script.onload = () => this.renderPayPalButton();
+    document.head.appendChild(script);
     }
 
   carritoCompra(): void {
@@ -29,7 +33,7 @@ export class CarritoComponent {
       console.log(data)
       this.pedido = data
       this.servicios = data.detalles_carrito;
-      this.totalCarrito = data.total_carrito;
+      this.totalCarrito = data.total_carrito.toFixed(2);
       console.log(this.servicios)
     });
   }
@@ -73,7 +77,7 @@ export class CarritoComponent {
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: this.totalCarrito.toFixed(2) // Monto de la compra
+              value: this.totalCarrito // Monto de la compra
             }
           }]
         });
