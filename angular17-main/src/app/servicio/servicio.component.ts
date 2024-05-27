@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceService } from '../services/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-servicio',
   templateUrl: './servicio.component.html',
-  styleUrls: ['./servicio.component.scss']  // Corrección aquí
+  styleUrls: ['./servicio.component.scss']
 })
 export class ServicioComponent implements OnInit {
   servicio_id: number = 0;
@@ -15,6 +15,7 @@ export class ServicioComponent implements OnInit {
 
   comentario: string = "";
   puntuacion: number = 0;
+  mediaPuntuacion: number = 0; // Declarar la propiedad mediaPuntuacion
 
   nombreUsuario: string = "";
   usuario: any;
@@ -38,6 +39,7 @@ export class ServicioComponent implements OnInit {
       id = +params['id'];
       this.ApiServiceService.getServicio(id).subscribe((data: any) => {
         this.servicio = data;
+        this.calcularMediaPuntuacion(); // Llamar al método aquí
       });
     });
   }
@@ -119,5 +121,14 @@ export class ServicioComponent implements OnInit {
         console.error('Error al añadir el producto:', error);
       }
     );
+  }
+
+  calcularMediaPuntuacion(): void {
+    if (this.servicio && this.servicio.resenias && this.servicio.resenias.length > 0) {
+      const totalPuntuaciones = this.servicio.resenias.reduce((acc: number, resenia: { puntuacion: number }) => acc + resenia.puntuacion, 0);
+      this.mediaPuntuacion = totalPuntuaciones / this.servicio.resenias.length;
+    } else {
+      this.mediaPuntuacion = 0; // Si no hay reseñas, la media es 0
+    }
   }
 }

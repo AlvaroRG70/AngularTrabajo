@@ -67,6 +67,31 @@ export class CarritoComponent {
   }
 
 
+  renderPayPalButton(): void {
+    paypal.Buttons({
+      createOrder: (data: any, actions: any) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: this.totalCarrito.toFixed(2) // Monto de la compra
+            }
+          }]
+        });
+      },
+      onApprove: (data: any, actions: any) => {
+        return actions.order.capture().then((details: any) => {
+          alert('Pago completado por ' + details.payer.name.given_name);
+          this.pagarPedido(this.pedido.id);
+        });
+      },
+      onError: (err: any) => {
+        console.error('Error durante el proceso de pago:', err);
+      }
+    }).render('#paypal-button-container');
+  }
+  
+
+
  
 
 
