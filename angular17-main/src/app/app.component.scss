@@ -5,7 +5,7 @@
   }
 
 .menu {
-    background-color: #c8c8c8; /* Gris claro */
+    background-color: #379237; /* Gris claro#508D69 */
 }
 
 .accordion-header:after {
@@ -22,4 +22,13 @@
 .accordion-header[aria-expanded="true"]:after {
   content: "🔺";
 
+}
+
+body {
+  background-color:#F2FFE9;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #F2FFE9; /* Cambia el color según tus preferencias */
 }
