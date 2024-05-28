@@ -5,8 +5,14 @@
   }
 
 .menu {
-    background-color: #379237; /* Gris claro#508D69 */
+    background-color: #2E8B57; /* Gris claro#508D69 */
+    color: #F2FFE9!important;
 }
+
+a {
+  color: #F2FFE9;
+}
+
 
 .accordion-header:after {
   content: "🔻";

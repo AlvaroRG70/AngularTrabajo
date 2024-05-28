@@ -14,11 +14,20 @@
             <a class="nav-link" href="crear/servicios">Crear Servicios</a>
           </li>
 
-          <a class="nav-link btn btn-outline-primary" routerLink="/carrito">
-            <i class="bi bi-cart"></i> Carrito
-          </a>
-        </ul>
+          <li *ngIf="tieneToken()" class="nav-item">
+            <a class="nav-link" href="/carrito">Carrito</a>
+          </li>
 
+          <li *ngIf="tieneToken()" class="nav-item">
+            <a class="nav-link" href="comentarios/usuario">Mis comentarios</a>
+          </li>
+
+
+        <li *ngIf="tieneToken()" class="nav-item">
+          <a class="nav-link" href="pedidos/usuario">Mis pedidos</a>
+        </li>
+      </ul>
+        
 
         <div class="d-flex mx-2 mr-auto"> <!-- Alineación a la izquierda -->
           <form *ngIf="tieneToken()" class="d-flex" (submit)="buscar()">

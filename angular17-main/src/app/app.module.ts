@@ -25,7 +25,9 @@ import { EditarServicioComponent } from './editar-servicio/editar-servicio.compo
 import { CarritoComponent } from './carrito/carrito.component';
 import { PagoComponent } from './pago/pago.component';
 import { FooterComponent } from './footer/footer.component';
-
+import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
+import { ListaComentariosUsuarioComponent } from './lista-comentarios-usuario/lista-comentarios-usuario.component';
+import { PedidoPagadoRevisarComponent } from './pedido-pagado-revisar/pedido-pagado-revisar.component';
 
 
 
@@ -56,7 +58,10 @@ import { FooterComponent } from './footer/footer.component';
     EditarServicioComponent,
     CarritoComponent,
     PagoComponent,
-    FooterComponent
+    FooterComponent,
+    ListaPedidosComponent,
+    ListaComentariosUsuarioComponent,
+    PedidoPagadoRevisarComponent
   ],
   imports: [
     BrowserModule,

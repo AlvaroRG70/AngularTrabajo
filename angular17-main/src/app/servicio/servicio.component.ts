@@ -49,8 +49,8 @@ export class ServicioComponent implements OnInit {
     if (confirmacion) {
       this.ApiServiceService.deleteServicio(id).subscribe(
         response => {
-          this.router.navigate(['lista/servicios']);
           alert('Servicio eliminado correctamente');
+          this.router.navigate(['lista/servicios']);
         },
         error => {
           console.error('Error al eliminar el producto:', error);
@@ -59,6 +59,8 @@ export class ServicioComponent implements OnInit {
       );
     }
   }
+
+
 
   obtenerUsuario(Usuario: string) {
     this.route.params.subscribe(params => {

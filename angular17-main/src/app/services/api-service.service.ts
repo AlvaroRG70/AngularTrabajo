@@ -217,15 +217,37 @@ export class ApiServiceService {
       );
   }
 
-  getPagoBueno(idPedido: string){
+  getPagoBueno(idPago: number){
     const headers = this.getHeaders();
-    return firstValueFrom(
-      this.http.get<any>(`${this.apiUrl}obtener/pago/${idPedido}`, { headers })
-    )
+    return this.http.get<any>(`${this.apiUrl}revisar/pago/${idPago}`, { headers })
+      .pipe(
+        catchError(error => {
+          throw error;
+        })
+      );
   } 
 
 
-  
+
+  getComentariosUsuarios(): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get<any>(`${this.apiUrl}`+`resenia/usuario`, { headers })
+      .pipe(
+        catchError(error => {
+          throw error;
+        })
+      );
+  }
+
+  getPedidosUsuarios(): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get<any>(`${this.apiUrl}`+`usuario/pagos`, { headers })
+      .pipe(
+        catchError(error => {
+          throw error;
+        })
+      );
+  }
 
   enviarCorreo(data: any): Observable<any> {
     const headers = this.getHeaders();

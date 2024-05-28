@@ -16,6 +16,12 @@ import { EditarReseniaComponent } from './editar-resenia/editar-resenia.componen
 import { EditarServicioComponent } from './editar-servicio/editar-servicio.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PagoComponent } from './pago/pago.component';
+import { ListaComentariosUsuarioComponent } from './lista-comentarios-usuario/lista-comentarios-usuario.component';
+import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
+import { PedidoPagadoRevisarComponent } from './pedido-pagado-revisar/pedido-pagado-revisar.component';
+
+
+
 
 
 
@@ -38,6 +44,12 @@ const routes: Routes = [
   { path: 'editar/servicio/:id_servicio', component: EditarServicioComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'pago/:id_pedido', component: PagoComponent },
+  { path: 'comentarios/usuario', component: ListaComentariosUsuarioComponent },
+  { path: 'pedidos/usuario', component: ListaPedidosComponent },
+  { path: 'pago/revisar/:id_pedido', component: PedidoPagadoRevisarComponent },
+
+
+
 
 
 
