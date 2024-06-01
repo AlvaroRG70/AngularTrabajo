@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
-
+import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -28,6 +28,7 @@ export class EditarReseniaComponent {
     private activatedRoute: ActivatedRoute,
     private apiServiceService: ApiServiceService,
     private router: Router,
+    private location: Location,
 
   ) {}
 
@@ -53,19 +54,24 @@ export class EditarReseniaComponent {
   }
 
   volver() {
-    window.history.back();
+    this.location.back();
   }
-  
 
   
   
 
-  async reseniaEditar(){
-    const response = await this.apiServiceService.editarResenias(this.id_resenia(), this.formulario.value)
+  async reseniaEditar() {
+    const response = await this.apiServiceService.editarResenias(
+      this.id_resenia(),
+      this.formulario.value
+    );
+
     setTimeout(() => {
-      window.location.reload();
-    }, 100);
-    console.log(response)
+      this.location.back();
+      setTimeout(() => {
+        location.reload(); // Actualiza la página después de un segundo
+      }, 1000);
+    }, 1000);
   }
 
 

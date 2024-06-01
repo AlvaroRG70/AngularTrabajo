@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg menu">
   <div class="container-fluid">
-    <a href="/home" class="mx-2"><img class="logo" src="./assets/Logo_simple.png" alt=""></a>
+    <a href="/home" class="mx-2 "><img class="logo" src="./assets/Logo_Secundario.png" alt=""></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,48 +8,78 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
           <li *ngIf="tieneToken()" class="nav-item">
-            <a class="nav-link" href="lista/servicios">Servicios</a>
+            <a class="nav-link" href="lista/servicios"><strong><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M19.148 2.971A2.008 2.008 0 0 0 17.434 2H6.566c-.698 0-1.355.372-1.714.971L2.143 7.485A.995.995 0 0 0 2 8a3.97 3.97 0 0 0 1 2.618V19c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-8.382A3.97 3.97 0 0 0 22 8a.995.995 0 0 0-.143-.515l-2.709-4.514zm.836 5.28A2.003 2.003 0 0 1 18 10c-1.103 0-2-.897-2-2 0-.068-.025-.128-.039-.192l.02-.004L15.22 4h2.214l2.55 4.251zM10.819 4h2.361l.813 4.065C13.958 9.137 13.08 10 12 10s-1.958-.863-1.993-1.935L10.819 4zM6.566 4H8.78l-.76 3.804.02.004C8.025 7.872 8 7.932 8 8c0 1.103-.897 2-2 2a2.003 2.003 0 0 1-1.984-1.749L6.566 4zM10 19v-3h4v3h-4zm6 0v-3c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v3H5v-7.142c.321.083.652.142 1 .142a3.99 3.99 0 0 0 3-1.357c.733.832 1.807 1.357 3 1.357s2.267-.525 3-1.357A3.99 3.99 0 0 0 18 12c.348 0 .679-.059 1-.142V19h-3z"></path></svg> Servicios</strong></a>
           </li>
           <li *ngIf="tieneToken() && usuario.rol ===1" class="nav-item">
-            <a class="nav-link" href="crear/servicios">Crear Servicios</a>
+            <a class="nav-link" href="crear/servicios"><strong><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M20 2H8c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM8 16V4h12l.002 12H8z"></path><path d="M4 8H2v12c0 1.103.897 2 2 2h12v-2H4V8zm11-2h-2v3h-3v2h3v3h2v-3h3V9h-3z"></path></svg> Crear Servicios</strong></a>
           </li>
 
           <li *ngIf="tieneToken()" class="nav-item">
-            <a class="nav-link" href="/carrito">Carrito</a>
+            <a class="nav-link" href="/carrito">
+              <strong>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);">
+                  <path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"></path>
+                  <circle cx="10.5" cy="19.5" r="1.5"></circle>
+                  <circle cx="17.5" cy="19.5" r="1.5"></circle>
+                </svg> 
+                Carrito
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ servicios.length }}
+                  <span class="visually-hidden">elementos en el carrito</span>
+                </span>
+              </strong>
+            </a>
           </li>
+          
 
           <li *ngIf="tieneToken()" class="nav-item">
-            <a class="nav-link" href="comentarios/usuario">Mis comentarios</a>
+            <a class="nav-link" href="comentarios/usuario"><strong><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M7 7h10v2H7zm0 4h7v2H7z"></path><path d="M20 2H4c-1.103 0-2 .897-2 2v18l5.333-4H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14H6.667L4 18V4h16v12z"></path></svg> Mis comentarios</strong></a>
           </li>
 
 
         <li *ngIf="tieneToken()" class="nav-item">
-          <a class="nav-link" href="pedidos/usuario">Mis pedidos</a>
+          <a class="nav-link" href="pedidos/usuario"><strong><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M22 8a.76.76 0 0 0 0-.21v-.08a.77.77 0 0 0-.07-.16.35.35 0 0 0-.05-.08l-.1-.13-.08-.06-.12-.09-9-5a1 1 0 0 0-1 0l-9 5-.09.07-.11.08a.41.41 0 0 0-.07.11.39.39 0 0 0-.08.1.59.59 0 0 0-.06.14.3.3 0 0 0 0 .1A.76.76 0 0 0 2 8v8a1 1 0 0 0 .52.87l9 5a.75.75 0 0 0 .13.06h.1a1.06 1.06 0 0 0 .5 0h.1l.14-.06 9-5A1 1 0 0 0 22 16V8zm-10 3.87L5.06 8l2.76-1.52 6.83 3.9zm0-7.72L18.94 8 16.7 9.25 9.87 5.34zM4 9.7l7 3.92v5.68l-7-3.89zm9 9.6v-5.68l3-1.68V15l2-1v-3.18l2-1.11v5.7z"></path></svg> Mis pedidos</strong></a>
         </li>
       </ul>
         
 
-        <div class="d-flex mx-2 mr-auto"> <!-- Alineación a la izquierda -->
-          <form *ngIf="tieneToken()" class="d-flex" (submit)="buscar()">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="peliculaId" name="searchTerm">
-            <button class="btn btn-outline-success" type="submit" disabled>Buscar</button>
-          </form>
-        </div>
         
      
       <div class="d-flex mx-2 ml-auto"> <!-- Alineación a la derecha -->
         <ul class="navbar-nav">
           
           <li *ngIf="!tieneToken()" class="nav-item">
-            <a class="nav-link btn btn-outline-primary" routerLink="registro">Registro</a>
+            <button class="button" routerLink="registro">
+              Registrate ahora
+              <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                <path
+                  clip-rule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
           </li>
 
           <li *ngIf="!tieneToken()" class="nav-item m-1">
-            <a class="nav-link btn btn-outline-primary" routerLink="login">Login</a>
+            <button class="Btn" routerLink="login">
+  
+              <div class="sign" ><svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg></div>
+              
+              <div class="text">Login</div>
+            </button>
           </li>
+
+          
           <li *ngIf="tieneToken()" class="nav-item m-1 d-flex align-items-center">
-            <p class="m-0 me-2"> ¡Hola! , {{NombreUsuario}} {{eltoken}}</p>
-            <button class="btn btn-outline-primary" (click)="logout()">Desconectar</button>
+            <p class="m-0 me-2">  <strong><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"></path><path d="M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"></path></svg>  ¡Hola! , {{NombreUsuario}} {{eltoken}}</strong>  </p>
+
+            <button class="Btn" (click)="logout()">
+  
+              <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+              
+              <div class="text">Logout</div>
+            </button>
           </li>
         </ul>
       </div>
@@ -60,10 +90,8 @@
 </nav>
 
 
-<div class="container">
-  <h1 class="display-2 text-center my-4">XPO marketing</h1>
-  <h1 class="display-8 text-center my-4">AGENCIA DE MARKETING DIGITAL</h1>
-</div>
+
+
 
 <router-outlet></router-outlet>
 <app-footer></app-footer>

@@ -18,6 +18,11 @@ export class AppComponent {
 
   nombreUser: string="";
   usuario: any
+
+  servicios: any[] = [];
+
+  longitudLista: number =0;
+
   constructor(private router: Router,private PeliculasService: PeliculasService, private tokenService: TokenService, private ApiServiceService: ApiServiceService, private route: ActivatedRoute) { }
 
 
@@ -36,6 +41,7 @@ export class AppComponent {
 
     this.nombreUser = sessionStorage.getItem('nombreUsuario') || '';
     this.obtenerUsuario(this.nombreUser)
+    this.obtenerNumListCarrito()
   }
 
   getTokenFromSessionStorage(): void {
@@ -68,6 +74,18 @@ export class AppComponent {
       });
     });
   }
+
+
+    obtenerNumListCarrito(): void {
+      this.ApiServiceService.getCarrito().subscribe((data: any) => {
+        console.log(data)
+
+        this.servicios = data.detalles_carrito;
+        this.longitudLista = this.servicios.length;
+        console.log("Longitud de la lista:", this.longitudLista);
+
+      });
+    }
 
   
 

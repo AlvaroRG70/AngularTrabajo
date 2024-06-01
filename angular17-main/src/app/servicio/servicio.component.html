@@ -8,19 +8,67 @@
         <div class="col-md-8">
           <h3 class="display-1 my-4">{{ servicio.nombre }}</h3>
           <p>Descripción: {{ servicio.descripcion }}</p>
-          <h4>{{ servicio.precio }}€</h4>
+          <h1><strong>{{ servicio.precio }}€</strong></h1>
           
           <!-- Media de las puntuaciones -->
           <div *ngIf="mediaPuntuacion !== undefined" class="my-4">
             <h2>Media de Puntuaciones:</h2>
-            <h1>{{ mediaPuntuacion.toFixed(2) }}</h1> <!-- Mostrar la media con dos decimales -->
+            <div class="d-flex justify-content my-4 ">
+
+
+            
+              <h3>{{ mediaPuntuacion.toFixed(2) }}</h3> <!-- Mostrar la media con dos decimales -->
+
+              <!-- Mostrar estrellas llenas -->
+              <div>
+                <ng-container *ngFor="let star of [].constructor(getStarCount())" class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #000000;">
+                    <path d="m6.516 14.323-1.49 6.452a.998.998 0 0 0 1.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 0 0-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 0 0-1.822 0L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 0 0 .832-.586L12 5.43l1.799 3.981a.998.998 0 0 0 .832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 0 0-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 0 0-.276-.94l-3.038-2.962 4.09-.326z"></path>
+                  </svg>
+                </ng-container>
+
+                <!-- Mostrar estrellas vacías -->
+                <ng-container *ngFor="let star of [].constructor(getEmptyStarCount())">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 0.124);">
+                    <path d="m6.516 14.323-1.49 6.452a.998.998 0 0 0 1.529 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 0 0-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 0 0-1.822 0L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.214 4.107zm2.853-4.326a.998.998 0 0 0 .832-.586L12 5.43l1.799 3.981a.998.998 0 0 0 .832.586l3.972.315-3.271 2.944c-.284.256-.397.65-.293 1.018l1.253 4.385-3.736-2.491a.995.995 0 0 0-1.109 0l-3.904 2.603 1.05-4.546a1 1 0 0 0-.276-.94l-3.038-2.962 4.09-.326z"></path>
+                  </svg>
+                </ng-container>
+              </div>
+            </div>
+            
           </div>
-          
-          <a *ngIf="usuario.rol === 1" class="btn btn-secondary m-2" href="editar/servicio/{{servicio.id}}">Editar</a>
-          <a *ngIf="usuario.rol === 1" href="#" class="btn btn-danger m-2" (click)="eliminarProducto(servicio.id)">Eliminar</a>
-          <a class="btn btn-secondary m-2" (click)="agregarCarrito(servicio.id)">Añadir al carrito</a>
-          <a href="lista/servicios" class="btn btn-primary bg-dark m-2">Volver</a>
-          <button class="btn btn-secondary m-2" (click)="toggleFormulario()">Crear Comentario</button>
+          <div class="button-container d-flex justify-content-between my-2">  
+            <button class="edit-button" *ngIf="usuario.rol === 1" routerLink="editar/servicio/{{servicio.id}}">
+              <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                                <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                              </svg>
+            </button>
+            <button class="delete-button" *ngIf="usuario.rol === 1" (click)="eliminarProducto(servicio.id)">
+              <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                              </svg>
+            </button>
+
+            <div data-tooltip="carrito" class="button" (click)="agregarCarrito(servicio.id)">
+              <div class="button-wrapper">
+                <div class="text">Agregar</div>
+                  <span class="icon">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+            <button type="submit" (click)="toggleFormulario()" class="btn  btn-dark-gray">Crear Comentario</button>
+
+            <button  (click)="toggleFormulario()" class="btn  btn-dark-gray">Volver</button>
+            
+            
+
+
+ 
+          </div>
         </div>
 
         <div class="form-container sign-up container">

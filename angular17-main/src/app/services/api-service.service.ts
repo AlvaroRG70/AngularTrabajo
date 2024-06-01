@@ -259,6 +259,16 @@ export class ApiServiceService {
       );
   }
 
+  enviarCorreoPagado(data: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(`http://127.0.0.1:8000/api/v1/email/pagado`, data, { headers })
+      .pipe(
+        catchError(error => {
+          throw error;
+        })
+      );
+  }
+
   
 
 

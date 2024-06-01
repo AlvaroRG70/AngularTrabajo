@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceService } from '../services/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-comentarios-usuario',
@@ -47,18 +47,37 @@ export class ListaComentariosUsuarioComponent {
   }
 
   eliminarResenia(id: string): void {
-    const confirmacion = confirm('¿Estás seguro de que deseas eliminar esta reseña?');
-    if (confirmacion) {
-      this.ApiServiceService.deleteResenias(id).subscribe(
-        response => {
-          alert('Reseña eliminada correctamente');
-          window.location.reload();
-        },
-        error => {
-          console.error('Error al eliminar la reseña:', error);
-        }
-      );
-    }
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás volver atrás!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ApiServiceService.deleteResenias(id).subscribe(
+          response => {
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'El servicio ha sido eliminado.',
+              icon: 'success'
+            }).then(() => {
+              window.location.reload();
+            });
+          },
+          error => {
+            console.error('Error al eliminar la reseña:', error);
+            Swal.fire({
+              title: 'Error!',
+              text: 'Hubo un problema al eliminar la reseña.',
+              icon: 'error'
+            });
+          }
+        );
+      }
+    });
   }
 
 }

@@ -22,6 +22,7 @@ export class ServicioComponent implements OnInit {
 
   mostrarFormulario: boolean = false;
 
+
   constructor(private http: HttpClient, private ApiServiceService: ApiServiceService, private route: ActivatedRoute, private router: Router) { }
 
   toggleFormulario() {
@@ -45,19 +46,37 @@ export class ServicioComponent implements OnInit {
   }
 
   eliminarProducto(id: number): void {
-    const confirmacion = confirm('¿Estás seguro de que deseas eliminar este producto?');
-    if (confirmacion) {
-      this.ApiServiceService.deleteServicio(id).subscribe(
-        response => {
-          alert('Servicio eliminado correctamente');
-          this.router.navigate(['lista/servicios']);
-        },
-        error => {
-          console.error('Error al eliminar el producto:', error);
-          // Manejar el error de eliminación
-        }
-      );
-    }
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás volver atrás!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ApiServiceService.deleteServicio(id).subscribe(
+          response => {
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'El servicio ha sido eliminado.',
+              icon: 'success'
+            }).then(() => {
+              this.router.navigate(['lista/servicios']);
+            });
+          },
+          error => {
+            console.error('Error al eliminar el producto:', error);
+            Swal.fire({
+              title: 'Error!',
+              text: 'Hubo un problema al eliminar el producto.',
+              icon: 'error'
+            });
+          }
+        );
+      }
+    });
   }
 
 
@@ -85,7 +104,7 @@ export class ServicioComponent implements OnInit {
         response => {
           Swal.fire({
             icon: "success",
-            title: "Has creado el servicio correctamente",
+            title: "Has creado el comentario correctamente",
             showConfirmButton: false,
             timer: 1500
           }).then(() => {
@@ -99,28 +118,54 @@ export class ServicioComponent implements OnInit {
   }
 
   eliminarResenia(id: string): void {
-    const confirmacion = confirm('¿Estás seguro de que deseas eliminar esta reseña?');
-    if (confirmacion) {
-      this.ApiServiceService.deleteResenias(id).subscribe(
-        response => {
-          alert('Reseña eliminada correctamente');
-          window.location.reload();
-        },
-        error => {
-          console.error('Error al eliminar la reseña:', error);
-        }
-      );
-    }
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás volver atrás!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ApiServiceService.deleteResenias(id).subscribe(
+          response => {
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'La reseña ha sido eliminado.',
+              icon: 'success'
+            }).then(() => {
+              window.location.reload();
+            });
+          },
+          error => {
+            console.error('Error al eliminar la reseña:', error);
+            Swal.fire({
+              title: 'Error!',
+              text: 'Hubo un problema al eliminar la reseña.',
+              icon: 'error'
+            });
+          }
+        );
+      }
+    });
   }
 
   agregarCarrito(id: string): void {
     this.ApiServiceService.aniadirCarrito(id).subscribe(
       response => {
-        alert('Servicio añadido correctamente');
-        window.location.reload();
+        Swal.fire({
+          icon: 'success',
+          title: 'Añadido al carrito correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          window.location.reload();
+        });
       },
       error => {
         console.error('Error al añadir el producto:', error);
+        // Manejar el error de añadir al carrito
       }
     );
   }
@@ -132,5 +177,28 @@ export class ServicioComponent implements OnInit {
     } else {
       this.mediaPuntuacion = 0; // Si no hay reseñas, la media es 0
     }
+  }
+
+
+  getStarCount(): number {
+    if (this.mediaPuntuacion === undefined) {
+      return 0;
+    } else if (this.mediaPuntuacion < 1) {
+      return 0;
+    } else if (this.mediaPuntuacion < 2) {
+      return 1;
+    } else if (this.mediaPuntuacion < 3) {
+      return 2;
+    } else if (this.mediaPuntuacion < 4) {
+      return 3;
+    } else if (this.mediaPuntuacion < 5) {
+      return 4;
+    } else {
+      return 5;
+    }
+  }
+
+  getEmptyStarCount(): number {
+    return 5 - this.getStarCount();
   }
 }

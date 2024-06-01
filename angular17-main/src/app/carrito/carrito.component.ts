@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceService } from '../services/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -14,6 +15,9 @@ export class CarritoComponent {
   pedido: any
   servicios: any[] = [];
   totalCarrito: number = 0;
+  usuario: any;
+  email: any;
+
 
 
 
@@ -40,32 +44,50 @@ export class CarritoComponent {
 
 
   eliminarDelCarrito(id: string): void {
-    const confirmacion = confirm('¿Estás seguro de que deseas eliminar este producto?');
-    if (confirmacion) {
-      this.ApiServiceService.deleteServicioCarrito(id).subscribe(
-        response => {
-          this.router.navigate(['carrito'])
-          alert('Servicio eliminado del carrito correctamente');
-          window.location.reload();
-        },
-        error => {
-          console.error('Error al eliminar el producto:', error);
-        }
-      );
-    }
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás volver atrás!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ApiServiceService.deleteServicioCarrito(id).subscribe(
+          response => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado del carrito correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            }).then(() => {
+              this.router.navigate(['carrito']);
+              window.location.reload();
+            });
+          },
+          error => {
+            console.error('Error al eliminar el producto:', error);
+            // Manejar el error de eliminación del carrito
+          }
+        );
+      }
+    });
   }
 
-  pagarPedido(idPedido: string): void {
-    this.ApiServiceService.idPedido = idPedido
+  async pagarPedido(idPedido: string): Promise<void> {
+    const usuario = this.obtenerUsername();
+    await this.obtenerUsuarioAsync(usuario);
+    this.ApiServiceService.idPedido = idPedido;
     this.ApiServiceService.postPago().subscribe(
       response => {
         alert('Carrito pagado correctamente');
+        this.enviarCorreo(idPedido)  // Enviar correo después de pagar
         this.router.navigate([`pago/${idPedido}`]);
       },
       error => {
         console.error('Error al pagar el carrito:', error);
-        alert('Carrito vacío')
-        // Manejar el error de eliminación
+        alert('Carrito vacío');
       }
     );
   }
@@ -92,6 +114,48 @@ export class CarritoComponent {
         console.error('Error durante el proceso de pago:', err);
       }
     }).render('#paypal-button-container');
+  }
+
+
+  enviarCorreo(idPedido: string): void {
+    const dataEmail = {
+        to_email: this.email,
+        order_id: idPedido    
+    };
+    this.ApiServiceService.enviarCorreoPagado(dataEmail).subscribe(
+      emailResponse => {
+        console.log('Correo enviado con éxito:', emailResponse);
+        Swal.fire({
+          icon: "success",
+          title: "Su pago ha sido completado con éxito",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      emailError => {
+        console.error('Error al enviar el correo:', emailError);
+      }
+    );
+}
+
+  obtenerUsuarioAsync(Usuario: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.route.params.subscribe(params => {
+        this.ApiServiceService.getusuario(Usuario).subscribe((data: any) => {
+          console.log(data);
+          this.usuario = data;
+          this.email = data.email;
+          resolve();
+        }, error => {
+          console.error('Error al obtener el usuario:', error);
+          reject();
+        });
+      });
+    });
+  }
+
+  obtenerUsername() {
+    return sessionStorage.getItem('nombreUsuario') || '';
   }
   
 

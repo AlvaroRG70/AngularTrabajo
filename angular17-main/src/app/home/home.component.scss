@@ -1,0 +1,34 @@
+.container-fluid {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: justify;
+}
+
+
+
+.formato {
+    background-color: rgba(255, 255, 255, 0.517); /* Fondo semi-transparente */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.formato h2 {
+    margin-top: 20px;
+}
+
+.formato hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.formato .department {
+    margin-left: 20px;
+}
+
+.bg-image {
+    background-image: url('../../assets/mapa-andalucia.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Cambia el color del texto si es necesario para que se vea legible sobre la imagen de fondo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
+}
