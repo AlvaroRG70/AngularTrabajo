@@ -4,7 +4,7 @@ import { DjangoService } from '../services/django-service.service';
 import { ApiServiceService } from '../services/api-service.service';
 import { TokenService } from '../services/token.service';
 import { LoginService } from '../services/login.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -38,20 +38,17 @@ export class RegistroComponent {
     
     this.registroService.registrar(dataSignUp).subscribe(
       response => {
-        // Registro exitoso
-        const user = {usuario: this.username, pass: this.contrasenia1};
+        console.log('Registro exitoso:', response);
+        const user = { usuario: this.username, pass: this.contrasenia1 };
 
         this.loginService.loginUsuario(user).subscribe(
           data => {
-            // Almacena el token en sessionStorage
+            console.log('Login exitoso:', data);
             sessionStorage.setItem('token', data.access_token);
-            // Almacena el nombre de usuario en sessionStorage
             sessionStorage.setItem('nombreUsuario', this.username);
             
             setTimeout(() => {
-              const dataEmail = {
-                to_email: this.email
-              };
+              const dataEmail = { to_email: this.email };
               this.apiService.enviarCorreo(dataEmail).subscribe(
                 emailResponse => {
                   console.log('Correo enviado con éxito:', emailResponse);
@@ -61,9 +58,7 @@ export class RegistroComponent {
                     showConfirmButton: false,
                     timer: 1500
                   }).then(() => {
-                    // Navegar a la página deseada
                     this.router.navigate(['/home']).then(() => {
-                      // Recargar la página después de una breve pausa
                       setTimeout(() => {
                         window.location.reload();
                       }, 500);
@@ -77,13 +72,12 @@ export class RegistroComponent {
             }, 100);
           },
           loginError => {
-            // Error en el inicio de sesión
             console.error('Error al iniciar sesión después del registro:', loginError);
+            console.log('Detalles del error de inicio de sesión:', loginError.error);
           }
         );
       },
       error => {
-        // Error en el registro
         console.error('Error en el registro:', error);
         this.usuarioExistente = true;
       }

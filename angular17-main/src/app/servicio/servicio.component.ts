@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiServiceService } from '../services/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-servicio',
@@ -23,7 +24,8 @@ export class ServicioComponent implements OnInit {
   mostrarFormulario: boolean = false;
 
 
-  constructor(private http: HttpClient, private ApiServiceService: ApiServiceService, private route: ActivatedRoute, private router: Router) { }
+
+  constructor(private http: HttpClient, private ApiServiceService: ApiServiceService, private route: ActivatedRoute, private router: Router, private location: Location,) { }
 
   toggleFormulario() {
     this.mostrarFormulario = !this.mostrarFormulario;
@@ -200,5 +202,9 @@ export class ServicioComponent implements OnInit {
 
   getEmptyStarCount(): number {
     return 5 - this.getStarCount();
+  }
+
+  volver() {
+    this.location.back();
   }
 }

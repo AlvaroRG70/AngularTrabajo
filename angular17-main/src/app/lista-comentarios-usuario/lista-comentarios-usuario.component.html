@@ -1,15 +1,17 @@
-
-
-<div class="container" >
-    <div class="flex" *ngFor="let comentario of comentarios; let i = index">
-    <p>Comentario: {{ comentario.comentario }}</p>
-    <p>Puntuacion: {{ comentario.puntuacion }}</p>
-    <p>Nombre del Servicio: {{comentario.servicio_nombre}}</p>
-    <div>
-        <a class="btn btn-secondary m-2" href="editar/resenia/{{comentario.id}}">Editar</a>
-        <a class="btn btn-danger m-2" (click)="eliminarResenia(comentario.id)">Eliminar</a>
-    </div>
+<div class="container">
+    <h1 class="text-center">Mis Comentarios</h1>
     <hr>
+    <ng-container *ngIf="comentarios.length === 0">
+        <p class="text-center">No hay comentarios.</p>
+    </ng-container>
+    <div class="flex" *ngFor="let comentario of comentarios; let i = index">
+        <p>Comentario: {{ comentario.comentario }}</p>
+        <p>Puntuacion: {{ comentario.puntuacion }}</p>
+        <p>Nombre del Servicio: {{ comentario.servicio_nombre }}</p>
+        <div>
+            <a class="btn btn-secondary m-2" href="editar/resenia/{{ comentario.id }}">Editar</a>
+            <a class="btn btn-danger m-2" (click)="eliminarResenia(comentario.id)">Eliminar</a>
+        </div>
+        <hr>
     </div>
 </div>
-

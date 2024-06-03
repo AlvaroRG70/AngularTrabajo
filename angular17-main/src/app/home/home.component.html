@@ -65,5 +65,23 @@
         <h2>¿Necesitas información?</h2>
         <p>No dude en ponerse en contacto con nosotros para programar una consulta o discutir cómo podemos ayudarle a hacer crecer su empresa</p>
         <p>Estamos ansiosos por la posibilidad de colaborar con usted y esperamos poder ser parte de su éxito</p>
+
+        @if(tieneToken()){
+            <div>
+                <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="container mt-5">
+                    <div class="custom-field">
+                        <input id="nombre" name="nombre" [(ngModel)]="nombre" class="custom-input-field" required placeholder="Nombre">
+                    </div>
+                    <div class="custom-field">
+                        <input id="email_contact" name="email_contact" [(ngModel)]="email_contact" type="email" class="custom-input-field" required placeholder="Email">
+                    </div>
+                    <div class="custom-field">
+                        <textarea id="message" name="message" [(ngModel)]="message" class="custom-input-field" required placeholder="Mensaje"></textarea>
+                    </div>
+                    <button type="submit" class="custom-btn mt-3">Enviar</button>
+                </form>
+            </div>
+    }
+          
     </div>
 </div>

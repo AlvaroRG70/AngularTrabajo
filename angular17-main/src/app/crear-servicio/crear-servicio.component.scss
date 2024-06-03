@@ -1,0 +1,37 @@
+.custom-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.custom-input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.custom-input-field:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.custom-btn {
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #5791ff;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 15px auto 0; /* centrado verticalmente y 15px de margen arriba, 0 en los laterales */
+    display: block; /* asegura que ocupe el ancho máximo permitido */
+}
+
+.custom-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

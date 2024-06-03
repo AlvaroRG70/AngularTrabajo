@@ -5,8 +5,6 @@
     text-align: justify;
 }
 
-
-
 .formato {
     background-color: rgba(255, 255, 255, 0.517); /* Fondo semi-transparente */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
@@ -26,9 +24,73 @@
 }
 
 .bg-image {
-    background-image: url('../../assets/mapa-andalucia.png');
+    background-image: url('/assets/mapa-andalucia.png');
     background-size: cover;
     background-position: center;
     color: #fff; /* Cambia el color del texto si es necesario para que se vea legible sobre la imagen de fondo */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
+    min-height: 400px; /* Ajusta este valor según tus necesidades */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.custom-input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.custom-input-field:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.custom-btn {
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #5791ff;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 15px auto 0; /* centrado verticalmente y 15px de margen arriba, 0 en los laterales */
+    display: block; /* asegura que ocupe el ancho máximo permitido */
+    width: 35%;
+}
+
+.custom-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+

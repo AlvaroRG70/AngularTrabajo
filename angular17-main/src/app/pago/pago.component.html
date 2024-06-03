@@ -1,6 +1,6 @@
 <div *ngIf="pago">
     
-  
+  <h1 class="text-center">¡Muchas gracias por realizar su pedido nº {{ pago.pedido.id }}!</h1>
   <div class="container d-flex justify-content-center align-items-center">
 
     <button class="button " (click)="generatePDF()" type="button">
@@ -88,11 +88,11 @@
                       <td>{{ detalle.servicio.descripcion }}</td>
                       <td class="text-center">{{ detalle.servicio.precio }}</td>
                       <td class="text-center">{{ detalle.cantidad }}</td>
-                      <td class="text-right">{{ detalle.servicio.precio * detalle.cantidad }}</td>
+                      <td class="text-right">{{ detalle.servicio.precio * detalle.cantidad }} €</td>
                     </tr>
                     <tr>
                       <td colspan="5" class="text-right"><strong>Total</strong></td>
-                      <td class="text-right"><strong>{{ total }}</strong></td>
+                      <td class="text-right"><strong>{{ total }} €</strong></td>
                     </tr>
                   </tbody>
                 </table>

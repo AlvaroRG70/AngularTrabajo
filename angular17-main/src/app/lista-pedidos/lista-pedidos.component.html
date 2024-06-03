@@ -7,19 +7,20 @@
     }
     
 
-
-<div class="container" >
-    <div class="flex" *ngFor="let pedido of pedidos; let i = index">
-    <p>ID: {{ pedido.id }}</p>
-    <p>Fecha del pedido: {{ pedido.fecha_pago }}</p>
-    <p>Total: {{pedido.pedido.total}}</p>
-
-    <div>
-      <a [routerLink]="['/pago/revisar', pedido.id]" class="btn btn-primary">Ver más</a>
-
-
-
-    </div>
-    <hr>
-    </div>
-</div>
+    <div class="container">
+      <h1 class="text-center">Mis Pedidos</h1>
+      <hr>
+      <ng-container *ngIf="pedidos.length === 0">
+          <p class="text-center">No hay pedidos.</p>
+      </ng-container>
+      <div class="flex" *ngFor="let pedido of pedidos; let i = index">
+          <p>ID: {{ pedido.id }}</p>
+          <p>Fecha del pedido: {{ pedido.fecha_pago }}</p>
+          <p><strong>Total: {{ pedido.pedido.total }} €</strong></p>
+          <div>
+              <a [routerLink]="['/pago/revisar', pedido.id]" class="btn btn-primary">Ver más</a>
+          </div>
+          <hr>
+      </div>
+  </div>
+  

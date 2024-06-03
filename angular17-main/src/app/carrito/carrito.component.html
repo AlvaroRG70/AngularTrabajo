@@ -1,12 +1,15 @@
 <div class="container mt-5">
   <div class="row">
+
+    <h1 class="text-center">Carrito de compra</h1>
     <!-- Verificar si el carrito está vacío -->
     <ng-container *ngIf="servicios.length === 0; else carritoNoVacio">
-      <h1 class="text-center">El carrito está vacío</h1>
+      <p class="text-center">El carrito está vacío</p>
     </ng-container>
     <ng-template #carritoNoVacio>
-      <h1>Carrito</h1>
-      {{pedido.id}}
+      
+
+      <hr>
       <div class="card mb-3" *ngFor="let servicio of servicios">
         <div class="row g-0">
           <div class="col-md-2 d-flex align-items-center justify-content-end">
@@ -35,4 +38,3 @@
     <div id="paypal-button-container"></div>
   </div>
 </div>
-
