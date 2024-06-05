@@ -1,3 +1,11 @@
+@if(loading){
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+
 <div class="row">
   <div class="col-md-12">
     <div class="container">
@@ -97,6 +105,9 @@
       </h3>
       <div id="commentsCollapse" class="accordion-collapse collapse" aria-labelledby="commentsHeading" data-bs-parent="#accordionExample">
         <div class="row mb-5 mt-5">
+          <ng-container *ngIf="servicio.resenias.length === 0;">
+            <p class="text-center">No hay comentarios disponibles</p>
+          </ng-container>
           <div class="col-md-12">
             <div class="row" *ngIf="servicio.resenias">
               <div class="flex" *ngFor="let resenia of servicio.resenias; let i = index">

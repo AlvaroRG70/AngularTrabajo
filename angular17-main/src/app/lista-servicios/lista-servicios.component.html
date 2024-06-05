@@ -10,6 +10,9 @@
   <h1>Servicios Disponibles</h1>
   
   <div class="row mb-4">
+
+    
+
     <div class="col-md-6">
       <input type="text" class="form-control" placeholder="Buscar servicio" [(ngModel)]="searchTerm" (input)="filterAndSortServicios()">
     </div>
@@ -22,6 +25,9 @@
         <option value="za">Nombre: Z-A</option>
       </select>
     </div>
+    <ng-container *ngIf="servicios.length === 0;">
+      <p class="text-center">No hay servicios disponibles</p>
+    </ng-container>
   </div>
   
   <div *ngIf="loading" class="spinner-border" role="status">
@@ -34,7 +40,7 @@
         <img [src]="servicio.imagen ? 'http://127.0.0.1:8000/' + servicio.imagen : 'https://via.placeholder.com/300'" class="card-img-top" alt="Imagen del servicio">
         <div class="card-body">
           <h3 class="card-title">{{ servicio.nombre }}</h3>
-          <p class="card-text">{{ servicio.descripcion }}</p>
+          <p class="card-text">{{ servicio.descripcion.length > 100 ? (servicio.descripcion | slice:0:100) + '...' : servicio.descripcion   }}</p>
           <h2 class="card-text"> {{ servicio.precio }} €</h2>
           <a href="servicio/{{servicio.id}}" class="btn btn-primary">Ver más</a>
         </div>

@@ -17,6 +17,8 @@ export class CarritoComponent {
   totalCarrito: number = 0;
   usuario: any;
   email: any;
+  loading: boolean = true;
+
 
 
 
@@ -39,6 +41,8 @@ export class CarritoComponent {
       this.servicios = data.detalles_carrito;
       this.totalCarrito = data.total_carrito.toFixed(2);
       console.log(this.servicios)
+      this.loading = false;
+
     });
   }
 

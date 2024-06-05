@@ -21,6 +21,15 @@ export class DjangoService {
       );
   }
 
+  checkUsername(username: string): Observable<any> {
+    return this.http.post<any>(`http://127.0.0.1:8000/api/v1/check-username`, { username });
+  }
+
+  checkEmail(email: string): Observable<any> {
+    return this.http.post<any>(`http://127.0.0.1:8000/api/v1/check-email`, { email });
+  }
+
+
   
 
 

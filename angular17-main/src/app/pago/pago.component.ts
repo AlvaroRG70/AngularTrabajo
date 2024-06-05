@@ -20,6 +20,7 @@ export class PagoComponent {
   total: number = 0
 
   detallesCarrito: any[] = [];
+  loading: boolean=true;
 
   constructor(private http: HttpClient, private ApiServiceService: ApiServiceService, private route: ActivatedRoute, private router: Router) { }
 
@@ -35,6 +36,7 @@ export class PagoComponent {
       this.total = parseFloat(data.pedido.total)
       console.log(this.total)
       this.obtenerDetallesServicios(data.pedido.detalles_carrito);
+      this.loading = false;
 
     });
   }

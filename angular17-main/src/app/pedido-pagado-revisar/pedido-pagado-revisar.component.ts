@@ -19,6 +19,7 @@ export class PedidoPagadoRevisarComponent implements OnInit {
   id_pedido: string = ""
   total: number = 0
 
+  
   detallesCarrito: any[] = [];
 
   constructor(

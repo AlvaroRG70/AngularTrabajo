@@ -15,6 +15,8 @@ export class ListaComentariosUsuarioComponent {
   servicio_id: number = 0;
   servicio: any;
   comentarios: any;
+  loading: boolean = true;
+
 
   constructor(private http: HttpClient, private ApiServiceService: ApiServiceService, private route: ActivatedRoute, private router: Router) { } 
   
@@ -42,6 +44,7 @@ export class ListaComentariosUsuarioComponent {
       
       this.comentarios = data;
       this.servicio_id = data.servicio;
+      this.loading = false;
       
     });
   }

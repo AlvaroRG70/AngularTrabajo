@@ -1,37 +1,53 @@
 <div class="registration-form">
     <div class="form-container sign-up container">
-        <form (ngSubmit)="registroFormulario()">
-            <div class="form-icon">
-                <span>🔒</span>
-            </div>
-            <h1>Registro</h1>
-            <div class="form-group">
-                <label class="form-label" for="username">Username</label>
-                <input class="form-control item" id="username" name="username" type="text" [(ngModel)]="username" />
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control item" id="email" name="email" type="email" [(ngModel)]="email" />
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="password1">Contraseña</label>
-                <input class="form-control item" id="password1" name="password1" type="password" [(ngModel)]="contrasenia1" />
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="password2">Confirmar contraseña</label>
-                <input class="form-control item" id="password2" name="password2" type="password" [(ngModel)]="contrasenia2" />
-            </div>
-            <div class="mt-3 d-flex justify-content-center align-items-center">
-                <button class="boton-gen create-account" type="submit">
-                    <span>Enviar</span>
-                </button>
-            </div>
-            
-        </form>
-        <div class="social-media">
-            <div>
-                <p>¿Ya estás registrado? <a routerLink="/login">Inicia Sesión</a></p>
-            </div>
+      <form [formGroup]="registrationForm" (ngSubmit)="registroFormulario()">
+        <div class="form-icon">
+          <span>🔒</span>
         </div>
+        <h1>Registro</h1>
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <input formControlName="username" class="form-control item" id="username" type="text"/>
+          <div *ngIf="registrationForm.get('username')?.touched && registrationForm.get('username')?.invalid">
+            <small *ngIf="registrationForm.get('username')?.errors?.['required']" class="text-danger">El username es obligatorio.</small>
+            <small *ngIf="registrationForm.get('username')?.errors?.['usernameTaken']" class="text-danger">El username ya está en uso.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input formControlName="email" class="form-control item" id="email" type="email"/>
+          <div *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">
+            <small *ngIf="registrationForm.get('email')?.errors?.['required']" class="text-danger">El email es obligatorio.</small>
+            <small *ngIf="registrationForm.get('email')?.errors?.['email']" class="text-danger">El email no es válido.</small>
+            <small *ngIf="registrationForm.get('email')?.errors?.['emailTaken']" class="text-danger">El email ya está en uso.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password1">Contraseña</label>
+          <input formControlName="password1" class="form-control item" id="password1" type="password"/>
+          <div *ngIf="registrationForm.get('password1')?.touched && registrationForm.get('password1')?.invalid">
+            <small *ngIf="registrationForm.get('password1')?.errors?.['required']" class="text-danger">La contraseña es obligatoria.</small>
+            <small *ngIf="registrationForm.get('password1')?.errors?.['minlength']" class="text-danger">La contraseña debe tener al menos 8 caracteres.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password2">Confirmar contraseña</label>
+          <input formControlName="password2" class="form-control item" id="password2" type="password"/>
+          <div *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('password2')?.touched">
+            <small class="text-danger">Las contraseñas no coinciden.</small>
+          </div>
+        </div>
+        <div class="mt-3 d-flex justify-content-center align-items-center">
+          <button class="boton-gen create-account" type="submit">
+            <span>Enviar</span>
+          </button>
+        </div>
+      </form>
+      <div class="social-media">
+        <div>
+          <p>¿Ya estás registrado? <a routerLink="/login">Inicia Sesión</a></p>
+        </div>
+      </div>
     </div>
-</div>  
+  </div>
+  

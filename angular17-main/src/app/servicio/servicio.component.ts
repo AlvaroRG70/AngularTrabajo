@@ -22,6 +22,8 @@ export class ServicioComponent implements OnInit {
   usuario: any;
 
   mostrarFormulario: boolean = false;
+  loading: boolean = true;
+
 
 
 
@@ -43,6 +45,8 @@ export class ServicioComponent implements OnInit {
       this.ApiServiceService.getServicio(id).subscribe((data: any) => {
         this.servicio = data;
         this.calcularMediaPuntuacion(); // Llamar al método aquí
+        this.loading = false;
+
       });
     });
   }
