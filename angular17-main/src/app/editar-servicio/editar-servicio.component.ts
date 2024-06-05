@@ -26,7 +26,7 @@ export class EditarServicioComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private apiServiceService: ApiServiceService,
     private router: Router,
-
+    
   ) {}
 
 

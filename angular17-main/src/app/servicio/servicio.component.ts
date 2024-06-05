@@ -51,6 +51,8 @@ export class ServicioComponent implements OnInit {
     });
   }
 
+  
+
   eliminarProducto(id: number): void {
     Swal.fire({
       title: '¿Estás seguro?',
