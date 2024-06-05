@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-resenia',
@@ -61,18 +62,31 @@ export class EditarReseniaComponent {
   
 
   async reseniaEditar() {
-    const response = await this.apiServiceService.editarResenias(
-      this.id_resenia(),
-      this.formulario.value
-    );
-
-    setTimeout(() => {
-      this.location.back();
-      setTimeout(() => {
-        location.reload(); // Actualiza la página después de un segundo
-      }, 1000);
-    }, 1000);
-  }
+    try {
+        const response = await this.apiServiceService.editarResenias(this.id_resenia(), this.formulario.value);
+        Swal.fire({
+            icon: 'success',
+            title: 'Reseña editada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            setTimeout(() => {
+                this.location.back();
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }, 1000);
+        });
+        console.log(response);
+    } catch (error) {
+        console.error('Error al editar la reseña:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al editar la reseña. Por favor, inténtalo de nuevo.'
+        });
+    }
+}
 
 
 }
